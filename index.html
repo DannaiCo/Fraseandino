@@ -1,0 +1,95 @@
+<<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Dato Cervecero Fijo</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: #000;
+    }
+
+    /* Contenedor de toda la pantalla */
+    .pantalla {
+      width: 1800px;
+      height: 540px;
+      position: absolute;
+      left: 0;
+      top: 0;
+      background-image: url('fondo.png');
+      background-size: cover;
+      background-position: center;
+      transform-origin: top left;
+    }
+
+    /* Contenedor del área del texto */
+    .contenedor-frase {
+      position: absolute;
+      top: 278px;
+      left: 400px;
+      width: 940px;
+      height: 100px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      /* Puedes desactivar el fondo si no quieres que se vea */
+      background-color: rgba(255, 255, 255, 0); /* transparente */
+    }
+
+    #frase {
+      font-size: 80px;
+      color: black;
+      font-family: 'Open Sans', sans-serif;
+      font-weight: bold;
+      letter-spacing: 2px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="pantalla" id="pantalla">
+    <div class="contenedor-frase">
+      <div id="frase">Cargando frase...</div>
+    </div>
+  </div>
+
+  <script>
+    const frases = [
+      "Un colombiano promedio bebe hasta 55L de cerveza al año.",
+      "En Chequia, una persona consume 140L de cerveza al año.",
+      "En la Edad Media, era más seguro tomar cerveza que agua.",
+      'La espuma de la cerveza se llama "giste" y aporta aroma.',
+      "La cerveza es la 3ra bebida más consumida en el mundo.",
+      "La cerveza más fuerte del mundo tiene 67,5 % de alcohol.",
+      "La cerveza contiene antioxidantes naturales.",
+      "En Bélgica hay más de 1.500 tipos de cerveza.",
+      "La cerveza tiene menos azúcar que un jugo."
+    ];
+
+    let index = 0;
+    const elemento = document.getElementById("frase");
+
+    function cambiarFrase() {
+      elemento.textContent = frases[index];
+      index = (index + 1) % frases.length;
+    }
+
+    cambiarFrase();
+    setInterval(cambiarFrase, 5000);
+
+    function escalarPantalla() {
+      const escalaX = window.innerWidth / 2114;
+      const escalaY = window.innerHeight / 630;
+      const escala = Math.min(escalaX, escalaY);
+      document.getElementById("pantalla").style.transform = `scale(${escala})`;
+    }
+
+    window.addEventListener("resize", escalarPantalla);
+    escalarPantalla();
+  </script>
+</body>
+</html>
